@@ -1,0 +1,20 @@
+server:
+  port: 8761
+  servlet:
+    context-path: /discovery
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
