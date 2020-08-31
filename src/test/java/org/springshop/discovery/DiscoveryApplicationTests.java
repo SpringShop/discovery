@@ -1,4 +1,4 @@
-package com.taheruddin.discovery;
+package org.springshop.discovery;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

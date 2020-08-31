@@ -8,7 +8,7 @@
         <version>2.3.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.taheruddin</groupId>
+    <groupId>org.springshop</groupId>
     <artifactId>discovery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>discovery</name>
@@ -64,6 +64,38 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.33.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>%g/%a:%l</name>
+                            <build>
+                                <from>openjdk:8-jdk</from>
+                                <ports>
+                                    <port>8761</port>
+                                    <port>8762</port>
+                                </ports>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <!--<cmd>java -jar maven/${project.build.finalName}.jar</cmd>-->
+                                <entryPoint>sh -c "java ${JAVA_OPTS} -jar maven/${project.build.finalName}.jar"</entryPoint>
+                                <!--<entryPoint>
+                                    <exec>
+                                        <arg>java</arg>
+                                        <arg>${JAVA_OPTS}</arg>
+                                        <arg>-jar</arg>
+                                        <arg>maven/${project.build.finalName}.jar</arg>
+                                    </exec>
+                                </entryPoint>-->
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
             </plugin>
         </plugins>
     </build>

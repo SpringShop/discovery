@@ -2,6 +2,11 @@ server:
   port: 8761
   servlet:
     context-path: /discovery
+management:
+  server:
+    port: 8762
+    servlet:
+      context-path: /manage
 spring:
   security:
     user:
