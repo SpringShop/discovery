@@ -15,6 +15,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                cleanWs()
                 git url: 'https://github.com/SpringShop/discovery.git', branch: 'dev'
                 sh "./mvnw -DskipTests clean package"
                 sh "./mvnw docker:build"
@@ -45,6 +46,21 @@ pipeline {
                 // always {
 
                 // }
+            }
+        }
+
+        stage('Kubernetes') {
+            steps {
+                sh "echo 'Going to deploy in kubernetes'"
+                sh 'kubectl apply -f k8s.yml'
+                sh 'kubectl get service discovery'
+                sh 'kubectl describe service discovery'
+            }
+
+            post {
+                success {
+                    sh 'echo "Kubernetes deployment is successful." '
+                }
             }
         }
     }
