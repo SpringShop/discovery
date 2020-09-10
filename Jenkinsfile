@@ -52,9 +52,9 @@ pipeline {
         stage('Kubernetes') {
             steps {
                 sh "echo 'Going to deploy in kubernetes'"
-                sh 'kubectl apply -f k8s.yml'
-                sh 'kubectl get service discovery'
-                sh 'kubectl describe service discovery'
+                sh '/usr/local/bin/kubectl apply -f k8s.yml'
+                sh '/usr/local/bin/kubectl get service discovery'
+                sh '/usr/local/bin/kubectl describe service discovery'
             }
 
             post {
